@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const LAUNCH_DATE = new Date("2025-02-23T00:00:00");
+const LAUNCH_DATE = new Date("2026-02-23T00:00:00");
 
 function formatDuration(ms: number) {
   const totalSeconds = Math.floor(ms / 1000);
