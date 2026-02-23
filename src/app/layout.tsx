@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Heyi-blog",
   description: "这是一个关于 AI、编程与硬件实验的个人空间",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
