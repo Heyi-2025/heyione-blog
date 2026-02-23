@@ -1,0 +1,25 @@
+项目指令：为 Next.js 个人网站集成 Airtable 动态计划板块
+
+1. 项目背景：
+我正在使用 Next.js 开发个人网站 heyione.com。我希望建立一个“动态计划板块”，实现：我在手机端操作 Airtable 表格，网站前端自动抓取数据并展示。我不需要你向我解释原理或进行任何教学，请直接扫描我的项目目录并完成代码编写和文件创建。
+
+2. 数据源配置（Airtable）：
+我已经在根目录配置好了 .env.local 文件，包含了 AIRTABLE_PAT 和 AIRTABLE_BASE_ID。
+Table Name 是：DailyTasks
+表格字段结构如下，请在写代码时严格对应：
+- Date (日期)
+- Category (单选：健身、学习)
+- Task (文本：具体内容)
+- Status (复选框：是否完成)
+- Media (附件：图片/打卡照)
+
+3. 你的具体执行任务：
+请帮我创建并写好以下文件（请自动判断使用 ts/tsx 还是 js/jsx）：
+
+- 依赖安装：自动检查并使用 npm 安装 airtable 库。
+- 后端连接 (src/lib/airtable.ts 或 .js)：编写一个请求 Airtable API 的通用脚本，按 Date 倒序抓取数据并映射好上述字段，处理好异常情况。
+- 组件开发 (src/components/TaskCard.tsx 或 .jsx)：写一个漂亮的 React 卡片组件。样式要求：使用 Tailwind CSS，风格偏向“极客、深色模式、高级感”。未完成的任务显示灰色阴影，已完成的任务带上绿色勾选框和发光边框。如果有 Media 图片，请将其优雅地展示在卡片内。
+- 页面展示 (src/app/plans/page.tsx 或 .jsx)：创建一个 Server Component，引入组件并渲染成卡片流。
+- 核心刷新机制：必须使用 Next.js 的 ISR (revalidate) 模式来抓取 Airtable 数据，刷新间隔设置为 300 秒（在页面顶部添加 export const revalidate = 300;）。我已经把所有的 API Token 和 Base ID 写入了根目录的 .env.local 文件中。
+
+请直接开始执行修改，无需询问，完成后告诉我。

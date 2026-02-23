@@ -1,0 +1,20 @@
+## Error Type
+Build Error
+
+## Error Message
+Export getDailyTasks doesn't exist in target module
+
+## Build Output
+./src/app/plans/page.tsx:1:1
+Export getDailyTasks doesn't exist in target module
+> 1 | import { getDailyTasks } from '@/lib/airtable';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 | import TaskCard from '@/components/TaskCard';
+  3 |
+  4 | export const revalidate = 300; // ISR: 每 300 秒重新生成页面
+
+The export getDailyTasks was not found in module [project]/src/lib/airtable.ts [app-rsc] (ecmascript).
+Did you mean to import fetchDailyTasks?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Next.js version: 16.1.6 (Turbopack)
