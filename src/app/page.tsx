@@ -3,44 +3,29 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#060608] text-white overflow-hidden">
-      {/* 背景 */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-                             linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)`,
-            backgroundSize: "32px 32px",
-          }}
-        />
-        <div className="absolute top-0 left-1/3 w-[480px] h-[480px] bg-cyan-400/12 blur-[120px]" />
-        <div className="absolute bottom-1/3 right-1/4 w-[320px] h-[320px] bg-violet-400/12 blur-[100px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#060608]" />
-      </div>
-
-      <main className="relative max-w-3xl mx-auto px-6 py-20">
-        {/* 头部 */}
-        <header className="text-center mb-24">
-          <p className="text-[11px] tracking-[0.4em] text-cyan-400 uppercase mb-6">
-            Heyi Blog
-          </p>
-          <h1 className="text-3xl md:text-[2.5rem] font-light tracking-tight mb-5">
-            <span className="text-white">马年大吉</span>
-            <span className="text-white/30 mx-2.5">·</span>
-            <span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
-              龙马精神
+    <div className="min-h-screen text-white overflow-hidden fade-in">
+      <main className="relative max-w-5xl mx-auto px-8 py-24">
+        {/* Header */}
+        <header className="mb-32">
+          <div className="mb-8">
+            <span className="text-[11px] tracking-[0.4em] text-white/40 uppercase">
+              Developer Blog
             </span>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6 leading-tight">
+            <span className="text-white">Heyi</span>
+            <span className="text-white/20 mx-4">/</span>
+            <span className="text-white/60">Builds</span>
           </h1>
-          <p className="text-sm text-white/45 max-w-sm mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-white/40 max-w-2xl leading-relaxed font-light">
             这是一个关于 AI、编程与硬件实验的个人空间
           </p>
-          <nav className="flex justify-center gap-2 mt-10">
+          <nav className="flex flex-wrap gap-3 mt-12">
             <a
               href="https://github.com/Heyi-2025"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-xs border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-[#060608] transition-colors duration-200"
+              className="noir-button magnetic-target"
             >
               GitHub
             </a>
@@ -48,7 +33,7 @@ export default function Home() {
               href="https://x.com/HeyiBuilds"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-xs border-2 border-violet-400 text-violet-400 hover:bg-violet-400 hover:text-[#060608] transition-colors duration-200"
+              className="noir-button magnetic-target"
             >
               X
             </a>
@@ -56,64 +41,95 @@ export default function Home() {
               href="https://www.douyin.com/user/MS4wLjABAAAA1NcZ-glkeSQy0PJ4j4ZrjGcrKeFRf_FzbFayFyKc4gw"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-xs border-2 border-pink-400 text-pink-400 hover:bg-pink-400 hover:text-[#060608] transition-colors duration-200"
+              className="noir-button magnetic-target"
             >
               抖音
             </a>
           </nav>
         </header>
 
-        {/* 主板块 */}
-        <section className="grid md:grid-cols-2 gap-4 mb-24">
+        {/* Main sections */}
+        <section className="grid md:grid-cols-2 gap-6 mb-32">
           <Link
             href="/study"
-            className="group block p-7 border-2 border-cyan-400/40 bg-cyan-400/5 hover:border-cyan-400 hover:bg-cyan-400/15 transition-all duration-200"
+            className="group block p-10 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 magnetic-target"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-10 h-10 border-2 border-cyan-400 flex items-center justify-center text-cyan-400 text-sm font-medium">
-                学
+            <div className="flex items-center gap-4 mb-6">
+              <span className="w-12 h-12 border border-white/20 flex items-center justify-center text-white/80 text-base font-light">
+                $
               </span>
-              <h2 className="text-lg font-medium text-white group-hover:text-cyan-400 transition-colors">
-                学习计划
+              <h2 className="text-2xl font-light text-white group-hover:text-white/90 transition-colors">
+                Study
               </h2>
             </div>
-            <p className="text-[13px] text-white/50 leading-relaxed">
-              记录学习目标、STM32、前端与 AI 的进度
+            <p className="text-[14px] text-white/40 leading-relaxed font-light">
+              Learning paths, STM32, front-end development, and AI experiments
             </p>
-            <span className="mt-4 inline-flex items-center gap-1 text-xs text-cyan-400 group-hover:gap-2 transition-all">
-              进入
-              <span className="group-hover:translate-x-0.5">→</span>
-            </span>
+            <div className="mt-6 flex items-center gap-2 text-[12px] text-white/30 group-hover:text-white/50 transition-colors">
+              <span>cd study</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
           </Link>
 
           <Link
             href="/fitness"
-            className="group block p-7 border-2 border-violet-400/40 bg-violet-400/5 hover:border-violet-400 hover:bg-violet-400/15 transition-all duration-200"
+            className="group block p-10 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 magnetic-target"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <span className="w-10 h-10 border-2 border-violet-400 flex items-center justify-center text-violet-400 text-sm font-medium">
-                健
+            <div className="flex items-center gap-4 mb-6">
+              <span className="w-12 h-12 border border-white/20 flex items-center justify-center text-white/80 text-base font-light">
+                #
               </span>
-              <h2 className="text-lg font-medium text-white group-hover:text-violet-400 transition-colors">
-                健身计划
+              <h2 className="text-2xl font-light text-white group-hover:text-white/90 transition-colors">
+                Fitness
               </h2>
             </div>
-            <p className="text-[13px] text-white/50 leading-relaxed">
-              追踪训练安排、运动记录与身体状态
+            <p className="text-[14px] text-white/40 leading-relaxed font-light">
+              Training schedules, workout logs, and progress tracking
             </p>
-            <span className="mt-4 inline-flex items-center gap-1 text-xs text-violet-400 group-hover:gap-2 transition-all">
-              进入
-              <span className="group-hover:translate-x-0.5">→</span>
-            </span>
+            <div className="mt-6 flex items-center gap-2 text-[12px] text-white/30 group-hover:text-white/50 transition-colors">
+              <span>cd fitness</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
           </Link>
         </section>
 
-        {/* 底部 */}
-        <footer className="text-center pt-6 border-t-2 border-white/10">
-          <p className="text-[11px] text-white/35 mb-0.5">
-            已运营 <LaunchTimer />
-          </p>
-          <p className="text-[11px] text-white/25">@heyibuilds</p>
+        {/* Featured section */}
+        <section className="border-t border-white/10 pt-16">
+          <div className="flex items-center gap-4 mb-8">
+            <span className="w-8 h-px bg-white/30"></span>
+            <h3 className="text-[14px] text-white/40 font-light tracking-wider uppercase">
+              最新动态
+            </h3>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="p-6 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 magnetic-target">
+              <div className="text-[11px] text-white/30 mb-3">2026年2月24日</div>
+              <h4 className="text-[16px] text-white font-light mb-2">网站重构</h4>
+              <p className="text-[13px] text-white/40">使用 Next.js 构建极简主义开发者博客</p>
+            </div>
+            <div className="p-6 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 magnetic-target">
+              <div className="text-[11px] text-white/30 mb-3">2026年2月23日</div>
+              <h4 className="text-[16px] text-white font-light mb-2">Airtable集成</h4>
+              <p className="text-[13px] text-white/40">连接任务管理系统，实现实时同步</p>
+            </div>
+            <div className="p-6 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 magnetic-target">
+              <div className="text-[11px] text-white/30 mb-3">2026年2月22日</div>
+              <h4 className="text-[16px] text-white font-light mb-2">UI/UX设计</h4>
+              <p className="text-[13px] text-white/40">探索黑色美学与流畅交互体验</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-32 pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-[12px] text-white/30">
+              <LaunchTimer /> uptime
+            </p>
+            <p className="text-[12px] text-white/20 font-light">
+              @heyibuilds 2026
+            </p>
+          </div>
         </footer>
       </main>
     </div>

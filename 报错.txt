@@ -1,0 +1,40 @@
+23:30:27.314 Running build in Portland, USA (West) – pdx1
+23:30:27.314 Build machine configuration: 2 cores, 8 GB
+23:30:27.467 Cloning github.com/Heyi-2025/heyione-blog (Branch: main, Commit: 1e79b87)
+23:30:28.263 Cloning completed: 795.000ms
+23:30:29.012 Restored build cache from previous deployment (7PUABLBj48tnfCwhzQXj3yeKk1hs)
+23:30:30.218 Running "vercel build"
+23:30:30.827 Vercel CLI 50.22.0
+23:30:31.106 Installing dependencies...
+23:30:33.202 
+23:30:33.202 added 10 packages in 2s
+23:30:33.202 
+23:30:33.203 147 packages are looking for funding
+23:30:33.203   run `npm fund` for details
+23:30:33.233 Detected Next.js version: 16.1.6
+23:30:33.238 Running "npm run build"
+23:30:33.334 
+23:30:33.334 > heyi_dev@0.1.0 build
+23:30:33.334 > next build
+23:30:33.334 
+23:30:34.351 ▲ Next.js 16.1.6 (Turbopack)
+23:30:34.352 
+23:30:34.391   Creating an optimized production build ...
+23:30:40.036 ✓ Compiled successfully in 5.1s
+23:30:40.040   Running TypeScript ...
+23:30:42.806 Failed to compile.
+23:30:42.807 
+23:30:42.807 ./src/lib/airtable.ts:82:11
+23:30:42.807 Type error: Type '({ url: string; filename: string | undefined; } | null)[]' is not assignable to type '{ url: string; filename?: string | undefined; }[]'.
+23:30:42.807   Type '{ url: string; filename: string | undefined; } | null' is not assignable to type '{ url: string; filename?: string | undefined; }'.
+23:30:42.807     Type 'null' is not assignable to type '{ url: string; filename?: string | undefined; }'.
+23:30:42.808 
+23:30:42.808 [0m [90m 80 |[39m
+23:30:42.808  [90m 81 |[39m     [36mconst[39m rawMedia [33m=[39m fields[[32m"Media"[39m][33m;[39m
+23:30:42.808 [31m[1m>[22m[39m[90m 82 |[39m     [36mconst[39m media[33m:[39m [33mDailyTask[39m[[32m"media"[39m] [33m=[39m [33mArray[39m[33m.[39misArray(rawMedia)
+23:30:42.808  [90m    |[39m           [31m[1m^[22m[39m
+23:30:42.808  [90m 83 |[39m       [33m?[39m rawMedia
+23:30:42.808  [90m 84 |[39m           [33m.[39mmap((item) [33m=>[39m {
+23:30:42.808  [90m 85 |[39m             [36mif[39m ([0m
+23:30:42.858 Next.js build worker exited with code: 1 and signal: null
+23:30:42.904 Error: Command "npm run build" exited with 1

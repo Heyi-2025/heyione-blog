@@ -26,9 +26,9 @@ export interface DailyTask {
   }[];
 }
 
-const BASE_ID = process.env.AIRTABLE_BASE_ID;
-const TABLE_NAME = process.env.AIRTABLE_TABLE_NAME;
-const API_TOKEN = process.env.AIRTABLE_PAT;
+const BASE_ID = "applyvtJWHsRKfsiu";
+const TABLE_NAME = "DailyTasks";
+const API_TOKEN = "pat2cWnKF64u6aaUC.8b84acc5a1c18f3a8c915fe435f549aa1c8e3a5429c034e6ef215b067632c16d";
 
 /**
  * 从 Airtable 读取 DailyTasks 表的数据。
@@ -104,8 +104,7 @@ export async function fetchDailyTasks(
     return {
       id: record.id,
       date: (fields["Date"] as string | undefined) ?? null,
-      // 注意：字段名是 Ctegory（少了一个 a），需要与 Airtable 一致
-      category: (fields["Ctegory"] as string | undefined) ?? null,
+      category: (fields["Category"] as string | undefined) ?? null,
       task: String(fields["Task"] ?? ""),
       completed: Boolean(fields["Status"]),
       media,

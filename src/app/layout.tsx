@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ClientCursor from "@/components/ClientCursor";
 
 // 暂时移除 next/font/google 以解决 Turbopack 兼容性问题
 const geistSans = {
@@ -26,9 +27,11 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        {/* Client-side only cursor system */}
+        <ClientCursor />
       </body>
     </html>
   );
