@@ -4,9 +4,9 @@ import React, { useEffect } from 'react';
 
 export default function ClientCursor() {
   useEffect(() => {
-    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorDot = document.querySelector('.cursor-dot') as HTMLElement | null;
     const coordinates = document.querySelector('.coordinates');
-    const magneticTargets = document.querySelectorAll('.magnetic-target, a, button');
+    const magneticTargets = document.querySelectorAll<HTMLElement>('.magnetic-target, a, button');
 
     let mouseX = 0;
     let mouseY = 0;

@@ -79,9 +79,9 @@ export async function fetchDailyTasks(
     const fields = record.fields as Record<string, unknown>;
 
     const rawMedia = fields["Media"];
-    const media: DailyTask["media"] = Array.isArray(rawMedia)
+    const media: { url: string; filename?: string }[] = Array.isArray(rawMedia)
       ? rawMedia
-          .map((item) => {
+          .map((item): { url: string; filename?: string } | null => {
             if (
               item &&
               typeof item === "object" &&
