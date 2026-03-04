@@ -29,27 +29,33 @@ export default async function FitnessPage() {
   const timelineItems = [
     {
       date: "2026-02-24",
-      title: "Website Launch",
-      description: "Developer blog goes live",
-      status: "current" as const,
+      task: "Website Launch",
+      category: "fitness",
+      completed: false,
     },
     {
       date: "2026-02-23",
-      title: "Airtable Integration",
-      description: "Task management system connected",
-      status: "completed" as const,
+      task: "Airtable Integration",
+      category: "fitness",
+      completed: true,
     },
     {
       date: "2026-02-22",
-      title: "Design System",
-      description: "Noir aesthetic implemented",
-      status: "completed" as const,
+      task: "Design System",
+      category: "fitness",
+      completed: true,
+    },
+    {
+      date: "2026-02-21",
+      task: "Initial Setup",
+      category: "fitness",
+      completed: true,
     },
   ];
 
   return (
     <div className="min-h-screen text-white overflow-hidden">
-      <Timeline items={timelineItems} />
+      <Timeline tasks={timelineItems} />
 
       <main className="relative max-w-3xl mx-auto px-6 py-24">
         <Link
