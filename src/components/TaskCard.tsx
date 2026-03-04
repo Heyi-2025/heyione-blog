@@ -25,9 +25,9 @@ export default function TaskCard({ id, date, category, task, status, media }: Ta
       key={id}
       className={`
         relative p-8 border rounded-lg transition-all duration-300 magnetic-target
-        ${status
-          ? 'border-white/20 bg-white/[0.03] opacity-60'
-          : 'border-white/10 bg-white/[0.02] hover:bg-white/[0.05]'
+${status
+          ? 'border-blue-500/70 bg-blue-400/[0.05] opacity-80 shadow-[0_0_20px_rgba(59,130,246,0.5)]'
+          : 'border-blue-500/60 bg-blue-400/[0.03] hover:bg-blue-400/[0.08] hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]'
         }
       `}
     >

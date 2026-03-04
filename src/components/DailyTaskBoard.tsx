@@ -60,8 +60,8 @@ export default async function DailyTaskBoard({
               "relative overflow-hidden rounded-xl border backdrop-blur-sm",
               "transition-all duration-200 group",
               isCompleted
-                ? "border-emerald-400/70 bg-emerald-400/10 shadow-[0_0_24px_rgba(52,211,153,0.45)]"
-                : "border-white/10 bg-white/[0.02] shadow-[0_0_0_rgba(0,0,0,0)] group-hover:border-white/20 group-hover:shadow-[0_18px_45px_rgba(0,0,0,0.6)]",
+                ? "border-blue-500/80 bg-blue-500/15 shadow-[0_0_30px_rgba(59,130,246,0.6)]"
+                : "border-blue-400/30 bg-blue-400/[0.03] shadow-[0_0_0_rgba(0,0,0,0)] group-hover:border-blue-400/40 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]",
             ].join(" ")}
           >
             {/* 顶部信息行 */}
@@ -71,8 +71,8 @@ export default async function DailyTaskBoard({
                 className={[
                   "mt-0.5 flex h-8 w-8 items-center justify-center rounded-lg border text-xs font-semibold",
                   isCompleted
-                    ? "border-emerald-400 bg-emerald-500/20 text-emerald-200 shadow-[0_0_16px_rgba(52,211,153,0.6)]"
-                    : "border-white/15 bg-white/5 text-white/50",
+                    ? "border-blue-400 bg-blue-500/20 text-blue-200 shadow-[0_0_20px_rgba(59,130,246,0.8)]"
+                    : "border-blue-400/30 bg-blue-500/15 text-blue-200",
                 ].join(" ")}
               >
                 {isCompleted ? "✓" : "…"}

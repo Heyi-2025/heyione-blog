@@ -1,7 +1,6 @@
-import Link from "next/link";
+import VSCodeLayout from "@/components/VSCodeLayout";
 import { fetchDailyTasks } from "@/lib/airtable";
 import TaskCard from "@/components/TaskCard";
-import Timeline from "@/components/Timeline";
 
 export const dynamic = "force-dynamic";
 
@@ -25,44 +24,12 @@ export default async function StudyPage() {
       e instanceof Error ? e.message : "获取学习计划失败，请稍后再试。";
   }
 
-  // Prepare timeline data
-  const timelineItems = [
-    {
-      date: "2026-02-24",
-      title: "Website Launch",
-      description: "Developer blog goes live",
-      status: "current" as const,
-    },
-    {
-      date: "2026-02-23",
-      title: "Airtable Integration",
-      description: "Task management system connected",
-      status: "completed" as const,
-    },
-    {
-      date: "2026-02-22",
-      title: "Design System",
-      description: "Noir aesthetic implemented",
-      status: "completed" as const,
-    },
-  ];
-
   return (
-    <div className="min-h-screen text-white overflow-hidden">
-      <Timeline items={timelineItems} />
-
-      <main className="relative max-w-3xl mx-auto px-6 py-24">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-3 text-[13px] text-white/40 hover:text-white/70 transition-colors mb-16 magnetic-target"
-        >
-          <span>←</span>
-          <span>返回首页</span>
-        </Link>
-
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-light text-white mb-4">Study</h1>
-          <p className="text-[14px] text-white/40 max-w-xl leading-relaxed">
+    <VSCodeLayout>
+        
+        <div className="mb-8">
+          <h1 className="text-2xl font-mono mb-4">Study</h1>
+          <p className="text-sm text-gray-400">
             Learning paths, STM32, front-end development, and AI experiments
           </p>
         </div>
@@ -92,8 +59,6 @@ export default async function StudyPage() {
             ))}
           </div>
         )}
-      </main>
-    </div>
+      </VSCodeLayout>
   );
 }
-

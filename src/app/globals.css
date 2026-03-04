@@ -1,146 +1,556 @@
 @import "tailwindcss";
 
+/* IDE风格个人博客 - 全局样式系统 */
+
+/* ==================== 变量系统 ==================== */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ffffff;
-  --grid-color: rgba(255, 255, 255, 0.03);
-  --grid-size: 40px;
+  /* 核心配色 - 工程师IDE风格 */
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #121212;
+  --color-bg-tertiary: #1a1a1a;
+  --color-accent: #007AFF;
+  --color-accent-glow: rgba(0, 122, 255, 0.6);
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #CCCCCC;
+  --color-text-muted: #888888;
+  --color-border: #333333;
+  --color-border-active: var(--color-accent);
+
+  /* 字体系统 - Monospace为主 */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* 尺寸系统 - 精确到像素级 */
+  --border-width: 1px;
+  --nav-width: 280px;
+  --status-height: 24px;
+  --tab-height: 32px;
+  --header-height: 60px;
+
+  /* 动画变量 - 科技感 */
+  --transition-fast: 0.1s ease;
+  --transition-medium: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  --glow-animation: pulseGlow 2s infinite;
+  --scanline-animation: scanline 8s linear infinite;
+  --electric-animation: electricFlow 1.5s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ==================== 基础样式重置 ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 0 !important; /* 强制无圆角 */
 }
 
-/* Custom cursor - applied globally */
 html {
-  cursor: none;
+  cursor: crosshair;
   scroll-behavior: smooth;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 body {
-  cursor: none;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-mono), 'Courier New', monospace;
-  position: relative;
-  overflow-x: hidden;
+/* ==================== 自定义滚动条 ==================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-/* Sharp grid system */
-body::before {
-  content: '';
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+  border-left: var(--border-width) solid var(--color-border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border: none;
+  transition: var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent-glow);
+}
+
+/* ==================== 动画定义 ==================== */
+
+/* 蓝色呼吸发光效果 */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 5px var(--color-accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--color-accent-glow);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--color-accent-glow);
+  }
+}
+
+/* 复古终端扫描线效果 */
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+/* 电流流动效果 */
+@keyframes electricFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* 打字机效果 */
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* 网格滚动效果 */
+@keyframes gridScroll {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(20px, 20px);
+  }
+}
+
+/* ==================== 背景效果层 ==================== */
+
+/* 动态网格背景 */
+.background-grid {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-image:
-    linear-gradient(var(--grid-color) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-  background-size: var(--grid-size) var(--grid-size);
+    linear-gradient(rgba(0, 122, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 122, 255, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
   pointer-events: none;
-  z-index: 0;
+  z-index: -2;
+  animation: gridScroll 20s linear infinite;
 }
 
-/* Custom cursor */
-.cursor-dot {
-  width: 12px;
-  height: 12px;
-  background: #ffffff;
-  border-radius: 50%;
+/* 扫描线效果 */
+.scanline-overlay {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 122, 255, 0.03) 50%
+  );
+  background-size: 100% 4px;
   pointer-events: none;
-  z-index: 999999;
-  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  mix-blend-mode: normal;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  z-index: -1;
+  animation: var(--scanline-animation);
 }
 
-.cursor-dot.hover {
-  width: 24px;
-  height: 24px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+/* ==================== IDE布局组件 ==================== */
+
+/* 主容器 - 采用IDE分栏布局 */
+.ide-container {
+  display: flex;
+  height: 100vh;
+  background: var(--color-bg-primary);
+  position: relative;
 }
 
-/* Coordinate display */
-.coordinates {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.4);
-  font-family: var(--font-geist-mono);
-  z-index: 9999;
-  pointer-events: none;
+/* 左侧导航栏 - 文件树风格 */
+.ide-sidebar {
+  width: var(--nav-width);
+  background: var(--color-bg-secondary);
+  border-right: var(--border-width) solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
 }
 
-/* Smooth animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.ide-sidebar-header {
+  height: var(--header-height);
+  background: var(--color-bg-tertiary);
+  border-bottom: var(--border-width) solid var(--color-border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--color-text-primary);
 }
 
-.fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
+.ide-sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
 }
 
-/* Magnetic effect for interactive elements */
-.magnetic-target {
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.ide-sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: var(--transition-fast);
+  cursor: pointer;
 }
 
-/* Monospace headers */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-geist-mono), 'Courier New', monospace;
-  font-weight: 300;
-  letter-spacing: -0.02em;
+.ide-sidebar-item:hover {
+  background: rgba(0, 122, 255, 0.1);
+  color: var(--color-accent);
 }
 
-/* Noir aesthetic buttons */
-.noir-button {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  padding: 12px 24px;
-  font-family: var(--font-geist-mono);
+.ide-sidebar-item.active {
+  background: rgba(0, 122, 255, 0.15);
+  color: var(--color-accent);
+  border-left: 2px solid var(--color-accent);
+}
+
+.ide-sidebar-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 右侧内容区 - 编辑器风格 */
+.ide-editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-primary);
+}
+
+/* 顶部标签栏 */
+.ide-tabs {
+  height: var(--tab-height);
+  background: var(--color-bg-secondary);
+  border-bottom: var(--border-width) solid var(--color-border);
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.ide-tab {
+  height: 100%;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-secondary);
+  border-right: var(--border-width) solid var(--color-border);
+  color: var(--color-text-secondary);
   font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: var(--transition-fast);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ide-tab:hover {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.ide-tab.active {
+  background: var(--color-bg-primary);
+  color: var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+/* 主内容区 */
+.ide-content {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  padding: 24px;
+}
+
+/* 底部状态栏 */
+.ide-statusbar {
+  height: var(--status-height);
+  background: var(--color-bg-secondary);
+  border-top: var(--border-width) solid var(--color-border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  z-index: 10;
+}
+
+.ide-statusbar-item {
+  margin-right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ide-statusbar-item.accent {
+  color: var(--color-accent);
+}
+
+/* ==================== 通用UI组件 ==================== */
+
+/* IDE风格按钮 */
+.ide-button {
+  background: transparent;
+  border: var(--border-width) solid var(--color-border);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 8px 16px;
+  transition: var(--transition-medium);
+  cursor: pointer;
   position: relative;
   overflow: hidden;
 }
 
-.noir-button::before {
+.ide-button:hover {
+  border-color: var(--color-accent);
+  background: rgba(0, 122, 255, 0.1);
+  animation: var(--glow-animation);
+}
+
+.ide-button::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.6s ease;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 122, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
 }
 
-.noir-button:hover::before {
+.ide-button:hover::before {
   left: 100%;
 }
 
-.noir-button:hover {
-  border-color: rgba(255, 255, 255, 0.6);
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+/* IDE风格卡片 */
+.ide-card {
+  background: var(--color-bg-secondary);
+  border: var(--border-width) solid var(--color-border);
+  color: var(--color-text-primary);
+  padding: 16px;
+  transition: var(--transition-medium);
+  position: relative;
+}
+
+.ide-card:hover {
+  border-color: var(--color-accent);
+  animation: var(--glow-animation);
+}
+
+/* IDE风格输入框 */
+.ide-input {
+  background: var(--color-bg-tertiary);
+  border: var(--border-width) solid var(--color-border);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 8px 12px;
+  transition: var(--transition-fast);
+}
+
+.ide-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  animation: var(--glow-animation);
+}
+
+/* ==================== 特殊效果组件 ==================== */
+
+/* 电流分割线 */
+.electric-divider {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--line-color, var(--color-accent)),
+    rgba(var(--line-rgb, 0, 122, 255), 0.8),
+    var(--line-color, var(--color-accent)),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: electricPulse 3s ease-in-out infinite;
+  margin: 16px 0;
+}
+
+@keyframes electricPulse {
+  0%, 100% {
+    opacity: 0.6;
+    height: 1px;
+  }
+  50% {
+    opacity: 1;
+    height: 3px;
+  }
+}
+
+/* 打字机效果文本 */
+.typewriter-text {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 1s steps(40) forwards;
+}
+
+/* 发光强调文本 */
+.accent-text {
+  color: var(--color-accent);
+  text-shadow: 0 0 8px var(--color-accent-glow);
+}
+
+/* 二进制背景效果 */
+.binary-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="0" y="10" font-size="10" fill="rgba(0,122,255,0.05)">101010</text><text x="0" y="20" font-size="10" fill="rgba(0,122,255,0.05)">010101</text><text x="0" y="30" font-size="10" fill="rgba(0,122,255,0.05)">101010</text></svg>');
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 首页布局 */
+.home-container {
+  padding: 8px 0;
+}
+
+.menu-list {
+  margin-bottom: 16px;
+}
+
+.menu-label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  padding-left: 4px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  margin-bottom: 4px;
+}
+
+.menu-item:hover {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border);
+}
+
+.menu-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.icon-blue {
+  color: #60a5fa;
+  background: rgba(37, 99, 235, 0.15);
+  border: 1px solid rgba(37, 99, 235, 0.4);
+}
+
+.icon-green {
+  color: #4ade80;
+  background: rgba(22, 163, 74, 0.15);
+  border: 1px solid rgba(22, 163, 74, 0.4);
+}
+
+.icon-purple {
+  color: #a78bfa;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(124, 58, 237, 0.4);
+}
+
+.icon-orange {
+  color: #fb923c;
+  background: rgba(234, 88, 12, 0.15);
+  border: 1px solid rgba(234, 88, 12, 0.4);
+}
+
+.menu-label-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-right: 16px;
+  min-width: 80px;
+}
+
+.menu-desc {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.social-row {
+  display: flex;
+  gap: 16px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.social-link:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+  background: var(--color-bg-secondary);
+}
+
+.footer-text {
+  font-size: 12px;
+  color: var(--color-text-muted);
 }
