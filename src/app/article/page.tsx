@@ -1,118 +1,230 @@
-import VSCodeLayout from "@/components/VSCodeLayout";
+import CyberpunkLayout from "@/components/CyberpunkLayout";
+import Link from "next/link";
 
 export default function ArticlePage() {
+  const articles = [
+    {
+      title: 'Next.js + Airtable 打造动态计划看板：一次 Claude Code 辅助开发的极客实践',
+      excerpt: '最近在折腾我的个人网站 heyione.com，希望能建立一个"动态计划板块"。这次尝试了最硬核的 AI 辅助开发工具——Claude Code。',
+      tag: 'Next.js',
+      tagColor: 'cyan',
+      date: '2026/02/26',
+      readTime: '8 min'
+    },
+    {
+      title: '深入理解 React 18 并发渲染：从 Suspense 到 Transitions',
+      excerpt: '探索 React 18 带来的并发特性，了解如何利用 Suspense 和 Transitions 优化用户体验。',
+      tag: 'React',
+      tagColor: 'green',
+      date: '2026/02/20',
+      readTime: '12 min'
+    },
+    {
+      title: 'STM32 嵌入式开发入门：从环境搭建到第一个项目',
+      excerpt: '手把手教你搭建 STM32 开发环境，完成第一个 LED 闪烁项目。',
+      tag: 'Embedded',
+      tagColor: 'purple',
+      date: '2026/02/15',
+      readTime: '15 min'
+    },
+    {
+      title: 'Tailwind CSS 高级技巧：打造赛博朋克风格界面',
+      excerpt: '使用 Tailwind CSS 实现毛玻璃、霓虹发光、动态渐变等高级视觉效果。',
+      tag: 'CSS',
+      tagColor: 'pink',
+      date: '2026/02/10',
+      readTime: '10 min'
+    },
+    {
+      title: 'AI 辅助编程实战：如何让 Claude Code 成为你的编程伙伴',
+      excerpt: '分享使用 AI 编程工具的最佳实践，提高开发效率的同时保持代码质量。',
+      tag: 'AI',
+      tagColor: 'cyan',
+      date: '2026/02/05',
+      readTime: '6 min'
+    },
+  ];
+
   return (
-    <VSCodeLayout>
-      <article className="max-w-3xl mx-auto">
-        <header className="mb-8 border-b-3 border-gray-700 pb-6">
-          <h1 className="text-2xl font-mono mb-4 text-white">
-            Next.js + Airtable 打造动态计划看板：一次 Claude Code 辅助开发的极客实践
-          </h1>
-          <div className="text-xs text-gray-500 font-mono">
-            <span>Author: Heyi</span> |
-            <span className="ml-2">Date: 2026/2/26</span> |
-            <span className="ml-2">Site: heyione.com</span>
+    <CyberpunkLayout>
+      <div className="stats-grid">
+        <div className="stat-card">
+          <div className="stat-label">TOTAL ARTICLES</div>
+          <div className="stat-value">12</div>
+          <div className="stat-unit">POSTS</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">CATEGORIES</div>
+          <div className="stat-value">5</div>
+          <div className="stat-unit">TOPICS</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">TOTAL READS</div>
+          <div className="stat-value">1.2K</div>
+          <div className="stat-unit">VIEWS</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">AVG READ</div>
+          <div className="stat-value">8</div>
+          <div className="stat-unit">MINUTES</div>
+        </div>
+      </div>
+
+      <div style={{ marginBottom: '2rem' }}>
+        <Link href="/" className="btn">
+          <span>←</span> BACK TO HOME
+        </Link>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '2rem' }}>
+        <div>
+          <div className="card">
+            <div className="card-header">
+              <div className="card-title">ALL ARTICLES</div>
+              <div className="card-badge">TECH BLOG</div>
+            </div>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              {articles.map((article, index) => (
+                <article 
+                  key={index} 
+                  style={{ 
+                    padding: '1.5rem',
+                    background: 'var(--glass-bg)',
+                    border: '1px solid var(--glass-border)',
+                    borderRadius: '12px',
+                    transition: 'all 0.3s ease'
+                  }}
+                >
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                    <div style={{
+                      width: '80px',
+                      height: '80px',
+                      background: 'var(--bg-tertiary)',
+                      borderRadius: '8px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '2rem',
+                      flexShrink: 0
+                    }}>
+                      {article.tagColor === 'cyan' ? '⚡' : 
+                       article.tagColor === 'green' ? '◈' : 
+                       article.tagColor === 'purple' ? '◆' : '◉'}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <span className={`article-tag ${article.tagColor}`}>{article.tag}</span>
+                      <h3 style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '1.1rem',
+                        fontWeight: 600,
+                        color: 'var(--text-primary)',
+                        margin: '0.75rem 0 0.5rem',
+                        lineHeight: 1.4
+                      }}>
+                        {article.title}
+                      </h3>
+                      <p style={{
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '0.85rem',
+                        color: 'var(--text-secondary)',
+                        lineHeight: 1.6,
+                        marginBottom: '0.75rem'
+                      }}>
+                        {article.excerpt}
+                      </p>
+                      <div style={{
+                        display: 'flex',
+                        gap: '1rem',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.7rem',
+                        color: 'var(--text-muted)'
+                      }}>
+                        <span>{article.date}</span>
+                        <span>{article.readTime} read</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
-        </header>
+        </div>
 
-        <section className="mb-8">
-          <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-            最近在折腾我的个人网站 <code className="text-green-400 bg-gray-900 px-1 py-0.5">heyione.com</code>，希望能建立一个"动态计划板块"。我的诉求很明确：日常在手机端操作 Airtable 记录学习和健身打卡，网站前端自动拉取数据并渲染成带有极客深色风、发光边框的卡片。而且，我希望用 Next.js 的 ISR (revalidate) 模式来保障性能。
-          </p>
-          <p className="text-sm text-gray-300 leading-relaxed">
-            这次，我没有选择从零手写代码，而是尝试了最硬核的 AI 辅助开发工具——<strong className="text-white">Claude Code</strong>。这篇文章记录了我如何一步步与终端 AI 配合，从配置环境到解决底层 bug 的全过程。
-          </p>
-        </section>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div className="card">
+            <div className="card-header">
+              <div className="card-title">CATEGORIES</div>
+              <div className="card-badge">FILTER</div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              {[
+                { name: 'Next.js', count: 4, color: 'cyan' },
+                { name: 'React', count: 3, color: 'green' },
+                { name: 'Embedded', count: 2, color: 'purple' },
+                { name: 'CSS', count: 2, color: 'pink' },
+                { name: 'AI', count: 1, color: 'yellow' },
+              ].map((cat, i) => (
+                <div 
+                  key={i}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '0.75rem',
+                    background: 'var(--glass-bg)',
+                    border: '1px solid var(--glass-border)',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: `var(--neon-${cat.color})` }}>
+                    {cat.name}
+                  </span>
+                  <span style={{ 
+                    fontFamily: 'var(--font-mono)', 
+                    fontSize: '0.7rem', 
+                    color: 'var(--text-muted)',
+                    background: 'var(--bg-tertiary)',
+                    padding: '0.2rem 0.5rem',
+                    borderRadius: '4px'
+                  }}>
+                    {cat.count}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <section className="mb-8">
-          <h2 className="text-lg font-mono mb-4 text-white border-l-3 border-green-500 pl-4">Step 1: 准备数据源与环境变量</h2>
-          <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-            首先，在 Airtable 中建立一个名为 <code className="text-green-400 bg-gray-900 px-1 py-0.5">DailyTasks</code> 的表，字段结构设计如下：
-          </p>
-          <ul className="text-sm text-gray-300 mb-4 space-y-1 ml-4">
-            <li className="flex items-center"><span className="text-gray-500 mr-2">•</span><strong className="text-gray-400 mr-2">Date</strong> (日期)</li>
-            <li className="flex items-center"><span className="text-gray-500 mr-2">•</span><strong className="text-gray-400 mr-2">Category</strong> (单选：健身、学习)</li>
-            <li className="flex items-center"><span className="text-gray-500 mr-2">•</span><strong className="text-gray-400 mr-2">Task</strong> (文本：具体任务)</li>
-            <li className="flex items-center"><span className="text-gray-500 mr-2">•</span><strong className="text-gray-400 mr-2">Status</strong> (复选框：是否完成)</li>
-            <li className="flex items-center"><span className="text-gray-500 mr-2">•</span><strong className="text-gray-400 mr-2">Media</strong> (附件：打卡图片)</li>
-          </ul>
-          <p className="text-sm text-gray-300 leading-relaxed">
-            为了安全，绝不能在前端硬编码 Token。我在项目根目录创建了 <code className="text-green-400 bg-gray-900 px-1 py-0.5">.env.local</code>，把 <code className="text-green-400 bg-gray-900 px-1 py-0.5">AIRTABLE_PAT</code> 和 <code className="text-green-400 bg-gray-900 px-1 py-0.5">AIRTABLE_BASE_ID</code> 妥善安置。
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-lg font-mono mb-4 text-white border-l-3 border-green-500 pl-4">Step 2: 驯服终端与 Claude Code</h2>
-          <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-            在 Windows PowerShell 中启动 Claude Code 时，我遇到了一些"水土不服"的问题：
-          </p>
-          <ol className="text-sm text-gray-300 mb-4 space-y-2 ml-4">
-            <li><strong className="text-gray-400">网络代理问题：</strong>终端默认不走全局代理，导致连接 Anthropic 服务器失败。必须通过 <code className="text-green-400 bg-gray-900 px-1 py-0.5">$env:HTTP_PROXY</code> 手动指定端口。</li>
-            <li><strong className="text-gray-400">长文本截断：</strong>Windows 终端的缓冲区限制导致长提示词粘贴不全。</li>
-          </ol>
-          <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-            <strong className="text-white">降维打击方案：</strong>我放弃了在终端里和 AI 废话，直接在根目录新建了一个 <code className="text-green-400 bg-gray-900 px-1 py-0.5">task.txt</code>，把所有背景、Airtable 字段、UI 需求（Tailwind 极客风，完成状态带绿色发光边框）、ISR 300秒刷新等指令写得清清楚楚。
-          </p>
-          <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-            然后在终端里只需发送一句极简指令：
-          </p>
-          <pre className="bg-gray-950 border-3 border-gray-700 p-4 mb-4 text-xs text-green-400 font-mono overflow-x-auto">
-            读取根目录下的 task.txt 文件，并严格执行里面的所有项目指令。
-          </pre>
-          <p className="text-sm text-gray-300 leading-relaxed">
-            看着 Claude 自动跑 <code className="text-green-400 bg-gray-900 px-1 py-0.5">npm install airtable</code>，扫描目录，然后疯狂输出 <code className="text-green-400 bg-gray-900 px-1 py-0.5">src/lib/airtable.ts</code>、<code className="text-green-400 bg-gray-900 px-1 py-0.5">TaskCard.tsx</code> 和 <code className="text-green-400 bg-gray-900 px-1 py-0.5">page.tsx</code>，这种"全自动打工仔"的体验简直太棒了。
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-lg font-mono mb-4 text-white border-l-3 border-green-500 pl-4">Step 3: 解决本地预览的"死锁"</h2>
-          <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-            代码写完后，本地预览却翻车了。报错提示 <code className="text-green-400 bg-gray-900 px-1 py-0.5">Port 3000 is in use</code>，紧接着又出现了 <code className="text-green-400 bg-gray-900 px-1 py-0.5">Unable to acquire lock at .next/dev/lock</code>。
-          </p>
-          <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-            这是因为 Claude Code 在后台悄悄拉起了一个进程，而我又在另一个终端运行了 <code className="text-green-400 bg-gray-900 px-1 py-0.5">npm run dev</code>，导致两个进程抢夺 <code className="text-green-400 bg-gray-900 px-1 py-0.5">.next</code> 缓存文件的控制权。
-          </p>
-          <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-            <strong className="text-white">解决办法非常极客：</strong>
-          </p>
-          <pre className="bg-gray-950 border-3 border-gray-700 p-4 mb-4 text-xs text-green-400 font-mono overflow-x-auto">
-            # 1. 杀掉所有相关的终端进程 (Ctrl+C)
-            # 2. 强制清理被锁定的 Next.js 缓存
-            rm -r -force .next
-            # 3. 重新体面地启动
-            npm run dev
-          </pre>
-          <p className="text-sm text-gray-300 leading-relaxed">
-            当然，更聪明的做法是直接把这段报错扔回给 Claude，让它自己去跑 <code className="text-green-400 bg-gray-900 px-1 py-0.5">TASKKILL</code> 和清理缓存，实现系统级的自愈。
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-lg font-mono mb-4 text-white border-l-3 border-green-500 pl-4">Step 4: 路由打通，顺水推舟</h2>
-          <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-            主页 <code className="text-green-400 bg-gray-900 px-1 py-0.5">/plans</code> 跑通后，图片能正常渲染，打卡完成的任务也亮起了漂亮的绿色发光边框（<code className="text-green-400 bg-gray-900 px-1 py-0.5">border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.15)]</code>）。
-          </p>
-          <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-            趁热打铁，我直接让 Claude 利用已有的逻辑进行路由扩展：
-          </p>
-          <blockquote className="border-l-3 border-gray-700 pl-4 py-2 mb-4 text-sm text-gray-400 italic">
-            "基础功能已跑通。请直接复用 src/lib/airtable.ts 抓取数据，帮我创建 /study 和 /fitness 页面，分别过滤 Category 字段，保持 300 秒 ISR 并使用 TaskCard 组件。"
-          </blockquote>
-          <p className="text-sm text-gray-300 leading-relaxed">
-            不到一分钟，它就搞定了分类页面的生成。至此，我的站点结构与 Airtable 实现了完美的数据互通。
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-lg font-mono mb-4 text-white border-l-3 border-green-500 pl-4">总结</h2>
-          <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-            这次开发让我深刻体会到，使用 AI 写代码不仅是"对话"，更是一场"项目管理"。把需求文档化（task.txt），让 AI 拥有读写本地文件的权限，遇到报错直接抛给 AI 诊断，这才是 2026 年独立开发者该有的开发姿势。
-          </p>
-          <p className="text-sm text-gray-300 leading-relaxed">
-            欢迎来 <a href="http://heyione.com/plans" className="text-green-400 hover:bg-green-900 px-1 py-0.5 transition-colors">heyione.com/plans</a> 看看我的最终成果！
-          </p>
-        </section>
-      </article>
-    </VSCodeLayout>
+          <div className="card">
+            <div className="card-header">
+              <div className="card-title">TAGS</div>
+              <div className="card-badge">CLOUD</div>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+              {['TypeScript', 'JavaScript', 'React', 'Next.js', 'STM32', 'Embedded', 'Tailwind', 'CSS', 'Node.js', 'Python', 'AI', 'Claude'].map((tag, i) => (
+                <span 
+                  key={i}
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.65rem',
+                    padding: '0.4rem 0.8rem',
+                    background: 'var(--glass-bg)',
+                    border: '1px solid var(--glass-border)',
+                    borderRadius: '4px',
+                    color: 'var(--text-secondary)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </CyberpunkLayout>
   );
 }

@@ -1,4 +1,5 @@
-import VSCodeLayout from "@/components/VSCodeLayout";
+import CyberpunkLayout from "@/components/CyberpunkLayout";
+import Link from "next/link";
 import { fetchDailyTasks } from "@/lib/airtable";
 import TaskCard from "@/components/TaskCard";
 
@@ -20,32 +21,75 @@ export default async function StudyPage() {
   try {
     tasks = await fetchDailyTasks("学习");
   } catch (e) {
-    error =
-      e instanceof Error ? e.message : "获取学习计划失败，请稍后再试。";
+    error = e instanceof Error ? e.message : "获取学习计划失败，请稍后再试。";
   }
 
+  const completedCount = tasks.filter(t => t.completed).length;
+  const progress = tasks.length > 0 ? Math.round((completedCount / tasks.length) * 100) : 0;
+
   return (
-    <VSCodeLayout>
-        
-        <div className="mb-8">
-          <h1 className="text-2xl font-mono mb-4">Study</h1>
-          <p className="text-sm text-gray-400">
-            Learning paths, STM32, front-end development, and AI experiments
-          </p>
+    <CyberpunkLayout>
+      <div className="stats-grid">
+        <div className="stat-card">
+          <div className="stat-label">TOTAL TASKS</div>
+          <div className="stat-value">{tasks.length}</div>
+          <div className="stat-unit">ITEMS</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">COMPLETED</div>
+          <div className="stat-value">{completedCount}</div>
+          <div className="stat-unit">DONE</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">PENDING</div>
+          <div className="stat-value">{tasks.length - completedCount}</div>
+          <div className="stat-unit">TASKS</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">PROGRESS</div>
+          <div className="stat-value">{progress}%</div>
+          <div className="stat-unit">COMPLETE</div>
+        </div>
+      </div>
+
+      <div style={{ marginBottom: '2rem' }}>
+        <Link href="/" className="btn">
+          <span>←</span> BACK TO HOME
+        </Link>
+      </div>
+
+      <div className="card">
+        <div className="card-header">
+          <div className="card-title">STUDY PATH</div>
+          <div className="card-badge">LEARNING</div>
         </div>
 
         {error ? (
-          <div className="p-4 border border-white/10 bg-white/[0.02] text-[13px] text-white/50">
+          <div style={{
+            padding: '1.5rem',
+            background: 'rgba(255, 51, 102, 0.1)',
+            border: '1px solid rgba(255, 51, 102, 0.3)',
+            borderRadius: '12px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.85rem',
+            color: 'var(--neon-red)'
+          }}>
             {error}
           </div>
         ) : tasks.length === 0 ? (
-          <div className="p-8 border border-white/10 bg-white/[0.02]">
-            <p className="text-[14px] text-white/40">
-              还没有学习任务。请在 Airtable 中创建 Category 为"学习"的记录试试。
+          <div style={{
+            padding: '3rem',
+            textAlign: 'center',
+            background: 'var(--glass-bg)',
+            border: '1px solid var(--glass-border)',
+            borderRadius: '12px'
+          }}>
+            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+              还没有学习任务。请在 Airtable 中创建 Category 为"学习"的记录。
             </p>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {tasks.map((task) => (
               <TaskCard
                 key={task.id}
@@ -59,6 +103,7 @@ export default async function StudyPage() {
             ))}
           </div>
         )}
-      </VSCodeLayout>
+      </div>
+    </CyberpunkLayout>
   );
 }

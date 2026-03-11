@@ -2,18 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ClientCursor from "@/components/ClientCursor";
 
-// 暂时移除 next/font/google 以解决 Turbopack 兼容性问题
-const geistSans = {
-  variable: "--font-geist-sans",
-};
-
-const geistMono = {
-  variable: "--font-geist-mono",
-};
-
 export const metadata: Metadata = {
-  title: "Heyi-blog",
-  description: "这是一个关于 AI、编程与硬件实验的个人空间",
+  title: "Heyi.Blog | Personal Dashboard",
+  description: "AI、编程与硬件实验的个人空间",
   icons: {
     icon: "/favicon.png",
   },
@@ -26,12 +17,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning
-      >
+      <head>
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" 
+          rel="stylesheet" 
+        />
+      </head>
+      <body suppressHydrationWarning>
         {children}
-        {/* Client-side only cursor system */}
         <ClientCursor />
       </body>
     </html>

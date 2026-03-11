@@ -1,7 +1,7 @@
+import CyberpunkLayout from "@/components/CyberpunkLayout";
 import Link from "next/link";
 import { fetchDailyTasks } from "@/lib/airtable";
 import TaskCard from "@/components/TaskCard";
-import Timeline from "@/components/Timeline";
 
 export const dynamic = "force-dynamic";
 
@@ -21,85 +21,67 @@ export default async function FitnessPage() {
   try {
     tasks = await fetchDailyTasks("健身");
   } catch (e) {
-    error =
-      e instanceof Error ? e.message : "获取健身计划失败，请稍后再试。";
+    error = e instanceof Error ? e.message : "获取健身计划失败，请稍后再试。";
   }
 
-  // Prepare timeline data
-  const timelineItems = [
-    {
-      date: "2026-02-24",
-      task: "Website Launch",
-      category: "fitness",
-      completed: false,
-    },
-    {
-      date: "2026-02-23",
-      task: "Airtable Integration",
-      category: "fitness",
-      completed: true,
-    },
-    {
-      date: "2026-02-22",
-      task: "Design System",
-      category: "fitness",
-      completed: true,
-    },
-    {
-      date: "2026-02-21",
-      task: "Initial Setup",
-      category: "fitness",
-      completed: true,
-    },
-  ];
+  const completedCount = tasks.filter(t => t.completed).length;
+  const progress = tasks.length > 0 ? Math.round((completedCount / tasks.length) * 100) : 0;
 
   return (
-    <div className="min-h-screen text-white overflow-hidden">
-      <Timeline tasks={timelineItems} />
+    <CyberpunkLayout>
+      <div className="stats-grid">
+        <div className="stat-card">
+          <div className="stat-label">WORKOUTS</div>
+          <div className="stat-value">{tasks.length}</div>
+          <div className="stat-unit">SESSIONS</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">COMPLETED</div>
+          <div className="stat-value">{completedCount}</div>
+          <div className="stat-unit">DONE</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">REMAINING</div>
+          <div className="stat-value">{tasks.length - completedCount}</div>
+          <div className="stat-unit">TASKS</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">PROGRESS</div>
+          <div className="stat-value">{progress}%</div>
+          <div className="stat-unit">COMPLETE</div>
+        </div>
+      </div>
 
-      <main className="relative max-w-3xl mx-auto px-6 py-24">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-3 text-[13px] text-white/40 hover:text-white/70 transition-colors mb-16 magnetic-target"
-        >
-          <span>←</span>
-          <span>返回首页</span>
+      <div style={{ marginBottom: '2rem' }}>
+        <Link href="/" className="btn">
+          <span>←</span> BACK TO HOME
         </Link>
+      </div>
 
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-light text-white mb-4">Fitness</h1>
-          <p className="text-[14px] text-white/40 max-w-xl leading-relaxed">
-            Training schedules, workout logs, and progress tracking system
-          </p>
+      <div className="card">
+        <div className="card-header">
+          <div className="card-title">FITNESS TRACKER</div>
+          <div className="card-badge">TRAINING</div>
         </div>
 
         {error ? (
-          <div className="p-4 border border-white/10 bg-white/[0.02] text-[13px] text-white/50">
+          <div style={{ padding: '1.5rem', background: 'rgba(255, 51, 102, 0.1)', border: '1px solid rgba(255, 51, 102, 0.3)', borderRadius: '12px', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--neon-red)' }}>
             {error}
           </div>
         ) : tasks.length === 0 ? (
-          <div className="p-8 border border-white/10 bg-white/[0.02]">
-            <p className="text-[14px] text-white/40">
-              还没有健身任务。请在 Airtable 中创建 Category 为"健身"的记录试试。
+          <div style={{ padding: '3rem', textAlign: 'center', background: 'var(--glass-bg)', border: '1px solid var(--glass-border)', borderRadius: '12px' }}>
+            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+              还没有健身任务。请在 Airtable 中创建 Category 为"健身"的记录。
             </p>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {tasks.map((task) => (
-              <TaskCard
-                key={task.id}
-                id={task.id}
-                date={task.date || ''}
-                category="健身"
-                task={task.task}
-                status={task.completed}
-                media={task.media[0]?.url}
-              />
+              <TaskCard key={task.id} id={task.id} date={task.date || ''} category="健身" task={task.task} status={task.completed} media={task.media[0]?.url} />
             ))}
           </div>
         )}
-      </main>
-    </div>
+      </div>
+    </CyberpunkLayout>
   );
 }
-
