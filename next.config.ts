@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/article/lczbaby',
+        destination: '/lczbaby.html',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>劳动教育与日常实践</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --text-primary: #FFFFFF;
+            --text-secondary: #A1A1AA;
+            --text-muted: #666666;
+            --border-color: #222222;
+            --glass-bg: rgba(26, 26, 26, 0.6);
+        }
+        
+        .reveal-viewport {
+            background: #000000;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        .reveal-viewport::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .reveal .slides {
+            z-index: 10;
+        }
+        
+        .reveal .slides section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 40px;
+            height: 100%;
+        }
+        
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: none;
+        }
+        
+        .reveal h1 {
+            font-size: 1.5em;
+            color: var(--text-primary);
+            margin-bottom: 0.3em;
+        }
+        
+        .reveal h2 {
+            font-size: 1.1em;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.2em;
+            margin-bottom: 0.5em;
+        }
+        
+        .reveal h3 {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+        
+        .reveal p, .reveal li {
+            font-size: 0.6em;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+        
+        .reveal ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .reveal ul li {
+            position: relative;
+            padding-left: 1.5em;
+            margin-bottom: 0.4em;
+        }
+        
+        .reveal ul li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+            font-size: 0.7em;
+        }
+        
+        .subtitle {
+            font-size: 0.75em;
+            color: var(--text-muted);
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+        
+        .author {
+            position: absolute;
+            right: 50px;
+            bottom: 50px;
+            text-align: right;
+            color: var(--text-muted);
+            font-size: 0.6em;
+        }
+        
+        .author .name {
+            font-size: 1em;
+            color: var(--text-muted);
+            margin-bottom: 0.2em;
+        }
+        
+        .date {
+            position: absolute;
+            right: 50px;
+            bottom: 30px;
+            color: #444444;
+            font-size: 0.6em;
+            letter-spacing: 0.1em;
+        }
+        
+        .cover-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .title-wrapper {
+            text-align: center;
+        }
+        
+        .reveal .title-wrapper h1 {
+            margin-bottom: 0.5em;
+        }
+        
+        .decorative-line {
+            width: 150px;
+            height: 1px;
+            background: var(--border-color);
+            margin: 1em auto;
+        }
+        
+        .highlight-box {
+            background: var(--glass-bg);
+            border-left: 3px solid var(--text-muted);
+            padding: 0.8em 1.2em;
+            margin: 0.8em 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .reveal .toc-list li {
+            font-size: 0.7em;
+            padding: 0.4em 0 0.4em 2em;
+            margin-bottom: 0.8em;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .reveal .toc-list li::before {
+            content: '0' counter(list-item);
+            position: absolute;
+            left: 0;
+            color: var(--text-primary);
+            font-size: 0.7em;
+            font-weight: 700;
+        }
+        
+        .content-section {
+            max-width: 700px;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .content-section h2 {
+            text-align: center;
+        }
+        
+        .reveal .thanks {
+            text-align: center;
+            font-size: 1.8em;
+            color: var(--text-primary);
+            font-family: 'Noto Serif SC', serif;
+            letter-spacing: 0.15em;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+        
+        .reveal .fragment {
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .reveal .fragment.fade-up {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        
+        .reveal .fragment.fade-up.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .corner-decor {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            border: 1px solid var(--border-color);
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        .corner-decor.top-left {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .corner-decor.top-right {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .corner-decor.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .corner-decor.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        
+        .content-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .content-card h4 {
+            color: var(--text-primary);
+            font-size: 0.7em;
+            margin-bottom: 0.4em;
+            font-weight: 400;
+        }
+        
+        .content-card p {
+            font-size: 0.55em;
+            color: var(--text-secondary);
+        }
+        
+        .ending-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+        
+.ending-decor {
+            width: 200px;
+            height: 1px;
+            background: var(--border-color);
+            margin: 1.5em 0;
+        }
+        
+        .reveal .controls {
+            color: var(--text-muted);
+        }
+        
+        .reveal .controls button {
+            color: var(--text-muted);
+        }
+        
+        .reveal .controls button:hover {
+            color: var(--text-secondary);
+        }
+        
+        .reveal .progress {
+            background: rgba(100, 100, 100, 0.2);
+        }
+        
+        .reveal .progress span {
+            background: var(--text-muted);
+        }
+        
+        .reveal .slide-number {
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+    
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor top-right"></div>
+    <div class="corner-decor bottom-left"></div>
+    <div class="corner-decor bottom-right"></div>
+    
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- 第一页：封面 -->
+            <section>
+                <div class="cover-slide">
+                    <div class="title-wrapper">
+                        <h1>劳动教育与日常实践</h1>
+                        <div class="decorative-line"></div>
+                        <p class="subtitle">在点滴中体会劳动的价值</p>
+                    </div>
+                </div>
+                <div class="author">
+                    <div class="name">李承真</div>
+                </div>
+                <div class="date">2604</div>
+            </section>
+            
+            <!-- 第二页：目录 -->
+            <section>
+                <div class="content-section">
+                    <h2>目录</h2>
+                    <ul class="toc-list" style="list-style: none; counter-reset: list-item;">
+                        <li class="fragment fade-up" style="counter-increment: list-item;">劳动的态度</li>
+                        <li class="fragment fade-up" style="counter-increment: list-item;">工匠精神的日常体现</li>
+                        <li class="fragment fade-up" style="counter-increment: list-item;">创新性劳动的实践</li>
+                        <li class="fragment fade-up" style="counter-increment: list-item;">劳动与成长</li>
+                        <li class="fragment fade-up" style="counter-increment: list-item;">劳动成果的分享</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 第三页：劳动的态度（一） -->
+            <section>
+                <div class="content-section">
+                    <h2>一、劳动的态度</h2>
+                    <div class="highlight-box fragment fade-up">
+                        <p>劳动不仅是体力付出，更是一种积极向上的生活态度</p>
+                    </div>
+                    <div class="content-grid">
+                        <div class="content-card fragment fade-up">
+                            <h4>对个人生活的负责</h4>
+                            <p>保持个人区域整洁，让生活空间井然有序，体现自律与责任</p>
+                        </div>
+                        <div class="content-card fragment fade-up">
+                            <h4>对时间的合理管理</h4>
+                            <p>珍惜每一分钟，高效安排学习与生活，展现积极的人生态度</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 第四页：劳动的态度（二） -->
+            <section>
+                <div class="content-section">
+                    <h2>一、劳动的态度</h2>
+                    <h3 class="fragment fade-up">劳动态度的具体表现</h3>
+                    <ul>
+                        <li class="fragment fade-up">主动承担责任，不推诿、不逃避</li>
+                        <li class="fragment fade-up">认真对待每一项任务，无论大小</li>
+                        <li class="fragment fade-up">持续改进，追求更好的完成效果</li>
+                        <li class="fragment fade-up">尊重他人劳动成果，珍惜资源</li>
+                    </ul>
+                    <div class="highlight-box fragment fade-up" style="margin-top: 1em;">
+                        <p style="font-style: italic;">积极的态度是高效劳动的前提，心态决定成效</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 第五页：工匠精神（一） -->
+            <section>
+                <div class="content-section">
+                    <h2>二、工匠精神的日常体现</h2>
+                    <p class="fragment fade-up" style="margin-bottom: 1em;">
+                        工匠精神，在于把每一件普通的小事做到极致的耐心和专注
+                    </p>
+                    <ul>
+                        <li class="fragment fade-up">认真完成每一次作业，不敷衍、不将就</li>
+                        <li class="fragment fade-up">耐心整理每一次笔记，追求条理与清晰</li>
+                        <li class="fragment fade-up">彻底打扫一次卫生，不留任何死角</li>
+                    </ul>
+                    <div class="highlight-box fragment fade-up" style="margin-top: 1em;">
+                        <p style="font-style: italic; color: var(--text-primary);">
+                            "把简单的事情重复做，你就是专家；<br>把重复的事情用心做，你就是赢家。"
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 第六页：工匠精神（二） -->
+            <section>
+                <div class="content-section">
+                    <h2>二、工匠精神的日常体现</h2>
+                    <h3 class="fragment fade-up">工匠精神的核心要素</h3>
+                    <div class="content-grid">
+                        <div class="content-card fragment fade-up">
+                            <h4>专注</h4>
+                            <p>心无旁骛，全神贯注于当下任务，排除干扰</p>
+                        </div>
+                        <div class="content-card fragment fade-up">
+                            <h4>精益求精</h4>
+                            <p>不满足于"差不多"，追求"还可以更好"</p>
+                        </div>
+                        <div class="content-card fragment fade-up">
+                            <h4>持之以恒</h4>
+                            <p>日复一日的坚持，在平凡中创造不凡</p>
+                        </div>
+                        <div class="content-card fragment fade-up">
+                            <h4>细节意识</h4>
+                            <p>关注细节，在细微处见真章</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 第七页：创新性劳动（一） -->
+            <section>
+                <div class="content-section">
+                    <h2>三、创新性劳动的实践</h2>
+                    <p class="fragment fade-up" style="margin-bottom: 0.8em;">
+                        创新性劳动不需要门槛，大学生日常即可实践
+                    </p>
+                    <div class="content-grid">
+                        <div class="content-card fragment fade-up">
+                            <h4>数字工具优化学习</h4>
+                            <p>利用思维导图、笔记软件等工具，高效整理学习资料</p>
+                        </div>
+                        <div class="content-card fragment fade-up">
+                            <h4>发现生活小妙招</h4>
+                            <p>在日常生活中发现更省时省力的方法，让劳动事半功倍</p>
+                        </div>
+                    </div>
+                    <div class="highlight-box fragment fade-up" style="margin-top: 1em;">
+                        <p><strong style="color: var(--text-primary);">核心要义：</strong>劳动不仅要"出力"，更要"用脑"，通过创新提高效率</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 第八页：创新性劳动（二） -->
+            <section>
+                <div class="content-section">
+                    <h2>三、创新性劳动的实践</h2>
+                    <h3 class="fragment fade-up">创新实践的方向</h3>
+                    <ul>
+                        <li class="fragment fade-up">优化学习流程，如使用番茄工作法提高效率</li>
+                        <li class="fragment fade-up">改进整理收纳方法，创造更舒适的生活环境</li>
+                        <li class="fragment fade-up">探索数字化协作，提升团队合作效率</li>
+                        <li class="fragment fade-up">善于总结经验，形成可复制的劳动模式</li>
+                    </ul>
+                    <div class="highlight-box fragment fade-up" style="margin-top: 1em;">
+                        <p style="font-style: italic;">创新源于思考，实践出真知</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 第九页：劳动与成长（一） -->
+            <section>
+                <div class="content-section">
+                    <h2>四、劳动与成长</h2>
+                    <div class="highlight-box fragment fade-up">
+                        <p>劳动是成长的阶梯，每一次付出都在塑造更好的自己</p>
+                    </div>
+                    <p class="fragment fade-up" style="margin: 1em 0;">
+                        通过劳动，我们不仅创造价值，更在实践中获得成长：
+                    </p>
+                    <ul>
+                        <li class="fragment fade-up">锻炼意志品质，培养坚韧不拔的精神</li>
+                        <li class="fragment fade-up">提升动手能力，增强实践操作技能</li>
+                        <li class="fragment fade-up">积累宝贵经验，丰富人生阅历</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 第十页：劳动与成长（二） -->
+            <section>
+                <div class="content-section">
+                    <h2>四、劳动与成长</h2>
+                    <h3 class="fragment fade-up">劳动中培养的品质</h3>
+                    <div class="content-grid">
+                        <div class="content-card fragment fade-up">
+                            <h4>责任感</h4>
+                            <p>认真对待每一项任务，对自己的行为负责</p>
+                        </div>
+                        <div class="content-card fragment fade-up">
+                            <h4>毅力</h4>
+                            <p>面对困难不退缩，坚持到底完成任务</p>
+                        </div>
+                        <div class="content-card fragment fade-up">
+                            <h4>协作能力</h4>
+                            <p>学会与他人配合，共同完成目标</p>
+                        </div>
+                        <div class="content-card fragment fade-up">
+                            <h4>问题解决能力</h4>
+                            <p>在实践中发现问题，主动寻找解决方案</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 第十一页：劳动成果的分享 -->
+            <section>
+                <div class="content-section">
+                    <h2>五、劳动成果的分享</h2>
+                    <p class="fragment fade-up" style="margin-bottom: 1em;">
+                        分享劳动成果，让价值传递更远
+                    </p>
+                    <ul>
+                        <li class="fragment fade-up">记录劳动过程，分享心得体会</li>
+                        <li class="fragment fade-up">展示劳动成果，激励他人参与</li>
+                        <li class="fragment fade-up">交流劳动经验，共同进步提升</li>
+                        <li class="fragment fade-up">传递劳动价值，弘扬劳动精神</li>
+                    </ul>
+                    <div class="highlight-box fragment fade-up" style="margin-top: 1em;">
+                        <p style="font-style: italic; color: var(--text-primary);">
+                            "独乐乐不如众乐乐"，分享让劳动的意义更加深远
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 第十二页：结尾 -->
+            <section>
+                <div class="ending-slide">
+                    <h1 class="thanks">感谢聆听</h1>
+                    <div class="ending-decor"></div>
+                    <p style="color: var(--text-muted); font-size: 0.7em;">Thank You</p>
+                </div>
+            </section>
+            
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'convex',
+            transitionSpeed: 'slow',
+            backgroundTransition: 'zoom',
+            controls: true,
+            progress: true,
+            center: false,
+            slideNumber: 'c/t'
+        });
+        
+        (function() { // 粒子动画系统
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let animationId;
+            
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 1.2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.1;
+                    this.speedY = (Math.random() - 0.5) * 0.1;
+                    this.baseOpacity = Math.random() * 0.3 + 0.1;
+                    this.opacity = this.baseOpacity;
+                    this.twinkleSpeed = Math.random() * 0.03 + 0.01;
+                    this.twinklePhase = Math.random() * Math.PI * 2;
+                }
+                
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    this.twinklePhase += this.twinkleSpeed;
+                    this.opacity = this.baseOpacity * (0.5 + Math.sin(this.twinklePhase) * 0.5);
+                    
+                    if (this.x < -10) this.x = canvas.width + 10;
+                    if (this.x > canvas.width + 10) this.x = -10;
+                    if (this.y < -10) this.y = canvas.height + 10;
+                    if (this.y > canvas.height + 10) this.y = -10;
+                }
+                
+                draw() {
+                    const gradient = ctx.createRadialGradient(
+                        this.x, this.y, 0,
+                        this.x, this.y, this.size * 2
+                    );
+                    gradient.addColorStop(0, `rgba(80, 120, 160, ${this.opacity})`);
+                    gradient.addColorStop(0.5, `rgba(60, 100, 140, ${this.opacity * 0.5})`);
+                    gradient.addColorStop(1, 'rgba(50, 80, 120, 0)');
+                    
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+                    
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 0.5, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(100, 150, 200, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+            
+            function init() {
+                resize();
+                particles = [];
+                const particleCount = Math.min(120, Math.floor((canvas.width * canvas.height) / 12000));
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+                
+                // 绘制连线
+                particles.forEach((p1, i) => {
+                    particles.slice(i + 1).forEach(p2 => {
+                        const dx = p1.x - p2.x;
+                        const dy = p1.y - p2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(p1.x, p1.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = 'rgba(80, 120, 160, 0.08)';
+                            ctx.lineWidth = 0.3;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                
+                animationId = requestAnimationFrame(animate);
+            }
+            
+            window.addEventListener('resize', () => {
+                resize();
+            });
+            
+            init();
+            animate();
+        })();
+    </script>
+</body>
+</html>
