@@ -583,6 +583,14 @@
             slideNumber: 'c/t'
         });
         
+        document.addEventListener('click', function(e) {
+            if (e.button === 0 && 
+                !e.target.closest('.reveal .controls') && 
+                !e.target.closest('.reveal .progress')) {
+                Reveal.next();
+            }
+        });
+        
         (function() { // 粒子动画系统
             const canvas = document.getElementById('particles-canvas');
             const ctx = canvas.getContext('2d');
